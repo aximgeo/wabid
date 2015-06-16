@@ -33,10 +33,20 @@ module.exports = {
         });
     },
 
+    /**
+     * Appends a / to end of directory path if it does not exist
+     * @param dir
+     * @returns {*}
+     */
     checkDirectoryPath: function (dir) {
         return dir.indexOf('/') === dir.length - 1 ? dir : dir + "/";
     },
 
+    /**
+     * Returns true if the given file exists
+     * @param filePath
+     * @returns {boolean}
+     */
     exists: function (filePath) {
         var fileExists = true, fd;
         try {
