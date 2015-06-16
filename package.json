@@ -1,0 +1,19 @@
+{
+  "name": "wabid",
+  "version": "0.0.0",
+  "description": "Module to identify an ESRI Web Appbuilder widget",
+  "main": "wabid.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "GISi",
+    "WAB"
+  ],
+  "author": "Ian Firkin",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^2.2.5",
+    "chai": "^3.0.0"
+  }
+}
