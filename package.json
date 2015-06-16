@@ -15,9 +15,10 @@
   "devDependencies": {
     "mocha": "^2.2.5",
     "chai": "^3.0.0",
-    "mock-fs": "^2.7.1",
+    "mock-fs": "^2.7.1"
   },
   "dependencies": {
-    "fs": "0.0.2"
+    "fs": "0.0.2",
+    "path": "^0.11.14"
   }
 }

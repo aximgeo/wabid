@@ -51,4 +51,39 @@ describe('wabid', function() {
             expect(wabid.isWidget('my/mock/directory/', files)).to.be.false;
         });
     });
+
+    describe("Getting a list of subdirectories", function () {
+        afterEach(function () {
+            mock.restore();
+        });
+
+        it('Has a method to get a list of subdirectories', function () {
+            expect(wabid.getSubdirectories).to.exist;
+        });
+
+        it('Returns an empty array if there are no subdirectories', function () {
+            var expected = [];
+            mock({
+                'my/mock/directory': {
+                    'someFile.txt': ''
+                }
+            });
+            expect(wabid.getSubdirectories('my/mock/directory/')).to.deep.equal(expected);
+        });
+
+        it('Returns a list of subdirectories', function () {
+            var expected = [
+                'submock1',
+                'submock2'
+            ];
+            mock({
+                'my/mock/directory': {
+                    'submock1': {},
+                    'submock2': {},
+                    'someFile.txt': ''
+                }
+            });
+            expect(wabid.getSubdirectories('my/mock/directory/')).to.deep.equal(expected);
+        });
+    });
 });

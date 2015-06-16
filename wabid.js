@@ -1,6 +1,21 @@
-var fs = require('fs');
+var fs = require('fs'),
+    path = require('path');
 
 module.exports = {
+
+    /**
+     * Deletes all subdirectories that contain WAB widgets
+     * @param dir
+     */
+    deleteWidgets: function (dir) {
+
+    },
+
+    getSubdirectories: function (dir) {
+        return fs.readdirSync(dir).filter(function(file) {
+            return fs.statSync(path.join(dir, file)).isDirectory();
+        });
+    },
 
     /**
      * Returns true if the directory contains a WAB widget
