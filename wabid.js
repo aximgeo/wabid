@@ -1,5 +1,4 @@
-var fs = require('fs'),
-walk = require('walk');
+var fs = require('fs');
 
 module.exports = {
 
