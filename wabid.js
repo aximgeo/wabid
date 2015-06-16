@@ -4,16 +4,14 @@ var fs = require('fs'),
 module.exports = {
 
     /**
-     * Deletes all subdirectories that contain WAB widgets
+     * Returns all subdirectories that contain WAB widgets
      * @param dir
      */
-    deleteWidgets: function (dir) {
-
-    },
-
-    getSubdirectories: function (dir) {
+    getWidgetSubdirectories: function (dir, files) {
+        var self = this;
         return fs.readdirSync(dir).filter(function(file) {
-            return fs.statSync(path.join(dir, file)).isDirectory();
+            var filePath = path.join(dir, file);
+            return (fs.statSync(filePath).isDirectory() && self.isWidget(filePath, files));
         });
     },
 
@@ -27,11 +25,16 @@ module.exports = {
             'Widget.js'
         ];
         var self = this;
+        dir = self.checkDirectoryPath(dir);
         return wabFiles.map(function (file) {
             return dir + file;
         }).every(function (file) {
                 return self.exists(file);
         });
+    },
+
+    checkDirectoryPath: function (dir) {
+        return dir.indexOf('/') === dir.length - 1 ? dir : dir + "/";
     },
 
     exists: function (filePath) {

@@ -4,6 +4,16 @@ var expect = require('chai').expect,
 
 describe('wabid', function() {
 
+    describe("Checking directory endoing", function () {
+       it ("Appends a / if there is not one on the directory path", function () {
+           expect(wabid.checkDirectoryPath('myDir')).to.equal('myDir/');
+       });
+
+        it ("Does not append a / if there is already one", function () {
+            expect(wabid.checkDirectoryPath('myDir/')).to.equal('myDir/');
+        });
+    });
+
     describe("Checking for WAB files", function () {
 
         afterEach(function () {
@@ -52,13 +62,13 @@ describe('wabid', function() {
         });
     });
 
-    describe("Getting a list of subdirectories", function () {
+    describe("Getting a list of widget subdirectories", function () {
         afterEach(function () {
             mock.restore();
         });
 
         it('Has a method to get a list of subdirectories', function () {
-            expect(wabid.getSubdirectories).to.exist;
+            expect(wabid.getWidgetSubdirectories).to.exist;
         });
 
         it('Returns an empty array if there are no subdirectories', function () {
@@ -68,14 +78,11 @@ describe('wabid', function() {
                     'someFile.txt': ''
                 }
             });
-            expect(wabid.getSubdirectories('my/mock/directory/')).to.deep.equal(expected);
+            expect(wabid.getWidgetSubdirectories('my/mock/directory/')).to.deep.equal(expected);
         });
 
-        it('Returns a list of subdirectories', function () {
-            var expected = [
-                'submock1',
-                'submock2'
-            ];
+        it('Returns an empty array if there are no widget subdirectories', function () {
+            var expected = [];
             mock({
                 'my/mock/directory': {
                     'submock1': {},
@@ -83,7 +90,30 @@ describe('wabid', function() {
                     'someFile.txt': ''
                 }
             });
-            expect(wabid.getSubdirectories('my/mock/directory/')).to.deep.equal(expected);
+            expect(wabid.getWidgetSubdirectories('my/mock/directory/')).to.deep.equal(expected);
+        });
+
+        it('Returns all subdirectories that contain wab widgets', function () {
+            var expected = [
+                'submock1'
+            ];
+            var files = [
+                'Widget.js',
+                'manifest.json'
+            ];
+            mock({
+                'my/mock/directory': {
+                    'submock1': {
+                        'Widget.js': '',
+                        'manifest.json': ''
+                    },
+                    'submock2': {
+                        'Widget.js': ''
+                    },
+                    'someFile.txt': ''
+                }
+            });
+            expect(wabid.getWidgetSubdirectories('my/mock/directory/')).to.deep.equal(expected);
         });
     });
-});
+})
