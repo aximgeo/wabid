@@ -1,5 +1,6 @@
 {
   "name": "wabid",
+  "private": true,
   "version": "0.0.0",
   "description": "Module to identify an ESRI Web Appbuilder widget",
   "main": "wabid.js",
