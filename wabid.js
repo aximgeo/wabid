@@ -6,6 +6,8 @@ module.exports = {
     /**
      * Returns all subdirectories that contain WAB widgets
      * @param dir
+     * @param files
+     * @returns {Array|*}
      */
     getWidgetSubdirectories: function (dir, files) {
         var self = this;
@@ -17,7 +19,9 @@ module.exports = {
 
     /**
      * Returns true if the directory contains a WAB widget
-     * @param dir
+     * @param dir - directory in question
+     * @param files - optional list of files that identify a widget
+     * @returns {boolean}
      */
     isWidget: function(dir, files) {
         var wabFiles = files || [
