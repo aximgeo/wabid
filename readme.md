@@ -37,3 +37,4 @@ module.exports = function (grunt) {
 
     grunt.registerTask('bower-deps', ['bower:install']);
 }
+```
